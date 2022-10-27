@@ -2,11 +2,16 @@
 from time import time, mktime
 from glob import glob
 from datetime import datetime
+import os
 import opml
 import feedparser
 import yt_dlp
 
-# Get the date when the script was last run 
+# Create download folder if it doesn't exists
+if not os.path.exists('downloads'):
+    os.mkdir('downloads')
+
+# Get the date when the script was last run
 last_check = datetime.utcfromtimestamp(0)
 
 if len(glob('last.txt')) != 0:
@@ -16,7 +21,7 @@ if len(glob('last.txt')) != 0:
 
 # Get all channels
 urls = []
-outline = opml.parse('subs.opml')
+outline = opml.parse('downloads/subs.opml')
 for o in outline[0]:
     urls.append(o.xmlUrl)
 
@@ -34,18 +39,10 @@ if len(videos) == 0:
 else:
     print(str(len(videos))+' new videos found')
 
+    # Download the videos
     ydl_opts = {
         'ignoreerrors': True,
         'outtmpl': './downloads/%(uploader)s/%(title)s.%(ext)s',
-        'ffmpeg-location': '/usr/bin/ffmpeg',
-        # 'postprocessors': [{
-        #     'key': 'SponsorBlock',
-        #     'when': 'pre_process'
-        # }, {
-        #     'key': 'ModifyChapters',
-        #     'remove_sponsor_segments': SponsorBlockPP.CATEGORIES.keys(),
-        #     'force_keyframes': True
-        # }],
         'format': 'bestvideo+bestaudio',
     }
 
