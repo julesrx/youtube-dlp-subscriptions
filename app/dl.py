@@ -3,7 +3,6 @@ from time import time, mktime
 from glob import glob
 from datetime import datetime
 import os
-import opml
 import feedparser
 import yt_dlp
 
@@ -14,21 +13,24 @@ if not os.path.exists('downloads'):
 # Get the date when the script was last run
 last_check = datetime.utcfromtimestamp(0)
 
-if len(glob('last.txt')) != 0:
-    f = open('last.txt', 'r')
+if len(glob('downloads/last.txt')) != 0:
+    f = open('downloads/last.txt', 'r')
     last_check = datetime.utcfromtimestamp(float(f.read()))
     f.close()
 
 # Get all channels
-urls = []
-outline = opml.parse('downloads/subs.opml')
-for o in outline[0]:
-    urls.append(o.xmlUrl)
+channels = {}
+with open('downloads/channels.txt') as f:
+    for l in f.readlines():
+        split = l.split(':')
+        channels[split[0].strip()] = split[1].strip()
 
 # Get all videos depending on the last time the script was run
 videos = []
-for url in urls:
-    feed = feedparser.parse(url)
+for key in channels:
+    feed = feedparser.parse(
+        'https://www.youtube.com/feeds/videos.xml?channel_id=' + channels[key]
+    )
     for item in feed['items']:
         published = datetime.fromtimestamp(mktime(item['published_parsed']))
         if (published > last_check):
@@ -49,6 +51,6 @@ else:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(videos)
 
-f = open('last.txt', 'w')
+f = open('downloads/last.txt', 'w')
 f.write(str(time()))
 f.close()

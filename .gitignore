@@ -1,5 +1,2 @@
-last.txt
-subs.opml
-
 downloads/*
-!downloads/subs.sample.opml
+!downloads/*sample*

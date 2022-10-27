@@ -15,38 +15,18 @@ git clone https://github.com/julesrx/youtube-dlp-subscriptions
 cd youtube-dlp-subscriptions
 ```
 
-Create a `subs.opml` file inside `downloads/` and populate it with your channels to download from. See `subs.sample.opml` for an example.  
-See "[More on subs.opml](#more-on-subs.opml)" chapter below for more info.
+Create a `channels.txt` file inside `downloads/` and populate it with your channels to download from. See `channels.txt` for an example.  
+The only factor that you must change is the CHANNEL_ID. The text before is only for self-comments (and is useful for maintaining a long list).
 
 ### Docker-Compose
 
-If you are familiar with what docker is, and what docker-compose is to docker, this is the recommended method to use.
-
+If you are familiar with what docker is, and what docker-compose is to docker, this is the recommended method to use.  
 Start the process: `docker-compose up`
 
 ### Manual
 
-This method requires python3.
-
-First, install the dependencies: `pip install -r app/requirements.txt`
-
-Then, you can then run the script: `python3 dl.py`
-
-## More on subs.opml
-
-Start with this initial template:
-
-```xml
-<opml version="2.0">
-  <body>
-    <outline text="YouTube Subscriptions" title="YouTube Subscriptions">
-      <outline title="ANYTHING" type="rss" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=CHANNEL_ID" />
-    </outline>
-  </body>
-</opml>
-```
-
-The ONLY factor that you must change is the string of `CHANNEL_ID`. the text ANYTHING is only for self-comments (and is useful for maintaining a long list 😉).
+This method requires python3.  
+Run the bash script: `./run.sh`
 
 ## SyncThing
 
@@ -64,4 +44,4 @@ i.e: every day at 2AM, log stdout/stderr to log as well
 
 ## Thanks
 
-A thanks to mewfree and <https://github.com/mewfree/youtube-dl-subscriptions> for the original script and pukkandan for dlp.
+A thanks to [@mewfree](https://github.com/mewfree) for the original script and [@pukkandan](https://github.com/pukkandan) for [dlp](https://github.com/yt-dlp/yt-dlp).

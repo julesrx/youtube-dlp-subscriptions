@@ -1,3 +1,2 @@
-opml == 0.5
 feedparser == 6.0.10
 git+https://github.com/yt-dlp/yt-dlp@e63faa101cf7b9bf9f899cabb74ce03c7f893572
