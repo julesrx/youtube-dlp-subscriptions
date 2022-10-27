@@ -46,4 +46,4 @@ i.e: every day at 2AM, log stdout/stderr to log as well
 
 ## Thanks
 
-A thanks to [@mewfree](https://github.com/mewfree) for the original script and [@pukkandan](https://github.com/pukkandan) for [dlp](https://github.com/yt-dlp/yt-dlp).
+A thanks to [@mewfree](https://github.com/mewfree) for the [original script](https://github.com/mewfree/youtube-dl-subscriptions) and [@pukkandan](https://github.com/pukkandan) for [dlp](https://github.com/yt-dlp/yt-dlp).
