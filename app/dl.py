@@ -6,17 +6,12 @@ import os
 import feedparser
 import yt_dlp
 
-# Create download folder if it doesn't exists
-if not os.path.exists('downloads'):
-    os.mkdir('downloads')
-
 # Get the date when the script was last run
 last_check = datetime.utcfromtimestamp(0)
 
 if len(glob('downloads/last.txt')) != 0:
-    f = open('downloads/last.txt', 'r')
-    last_check = datetime.utcfromtimestamp(float(f.read()))
-    f.close()
+    with open('downloads/last.txt', 'r') as f:
+        last_check = datetime.utcfromtimestamp(float(f.read()))
 
 # Get all channels
 channels = {}
@@ -51,6 +46,5 @@ else:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download(videos)
 
-f = open('downloads/last.txt', 'w')
-f.write(str(time()))
-f.close()
+with open('downloads/last.txt', 'w') as f:
+    f.write(str(time()))
