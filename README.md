@@ -1,5 +1,7 @@
 # youtube-dlp-subscriptions
 
+Fork of [darkenvy/youtube-dlp-subscriptions](https://github.com/darkenvy/youtube-dlp-subscriptions) with and updated script, new docker files and a new format for the channel list.
+
 Downloads new videos from your YouTube subscription feeds since the last run.
 
 ## Requirements
